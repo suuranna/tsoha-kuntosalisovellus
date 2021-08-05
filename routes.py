@@ -1,6 +1,7 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 from app import app
 from flask import render_template, redirect, request, session
+from db import db
 import functions
 
 @app.route("/")
@@ -21,6 +22,11 @@ def login():
             return redirect("/")
         else:
             return "Virhe!"
+
+@app.route("/logout")
+def logout():
+    del session["username"]
+    return redirect("/")
 
 @app.route("/sign_up")
 def sign_up():
