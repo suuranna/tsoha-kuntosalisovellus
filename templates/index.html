@@ -1,0 +1,20 @@
+{% if session.username %}
+
+<h1>Kuntosalisovellus</h1>
+
+
+{% else %}
+
+<h2>Kirjaudu sisään</h2>
+<form action="/login" method="POST">
+Käyttäjätunnus:
+<input type="text" name="username"><br>
+
+Salasana:
+<input type="password" name="password"> <br>
+
+<input type="submit" value="Kirjaudu"> <br>
+<a href="/sign_up">Eikö sinulla ole käyttäjää? Luo käyttäjä</a> <br>
+
+
+{% endif %}
