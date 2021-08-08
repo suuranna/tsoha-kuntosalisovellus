@@ -11,6 +11,8 @@ def sign_up(username, hash_value):
         sql = "insert into users (username, password, admin) values (:username, :password, False)"
         db.session.execute(sql, {"username":username, "password":hash_value})
         db.session.commit()
-        return True
+        #return True
     except:
         return False
+    return True
+

@@ -52,4 +52,6 @@ def sign_up_action():
     else:
         return "Käyttäjätunnuksen luonti epäonnistui"
 
-
+@app.route("/add_gym_plan")
+def add_gym_plan():
+    return render_template("add_gym_plan.html")
