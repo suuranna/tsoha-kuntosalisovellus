@@ -1,5 +1,11 @@
 # Kuntosalisovellus
 
+### Missä vaiheessa sovellukseni on?
+
+Tällä hetkellä sovelluksessa on vain sisään kirjautuminen ja käyttäjätunnuksen luominen. 
+
+[Linkki Herokuun](https://tsoha-kuntosalisovellus.herokuapp.com)
+
 ### Sovelluksen idea tiivistettynä
 
 Sovelluksessa on kirjattuna salin x laitteet, joista käyttäjät (eli salin asiakkaat) voivat koota itselleen mieluisia kuntosaliohjelmia. 
