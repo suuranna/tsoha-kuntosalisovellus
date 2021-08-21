@@ -19,6 +19,8 @@ def login():
         hash_value = hashed_password[0]
         if check_password_hash(hash_value,password):
             session["username"] = username
+            session["admin"] = functions.is_admin(username)
+            session["user_id"] = functions.get_user_id(username)
             return redirect("/")
         else:
             return "Virhe!"
@@ -52,6 +54,20 @@ def sign_up_action():
     else:
         return "Käyttäjätunnuksen luonti epäonnistui"
 
-@app.route("/add_gym_plan")
+@app.route("/add_gym_plan", methods=["GET", "POST"])
 def add_gym_plan():
-    return render_template("add_gym_plan.html")
+    if request.method == "GET":
+        return render_template("add_gym_plan.html")
+    if request.method == "POST":
+        name = request.form["name"]
+        description = request.form["description"]
+        succesful_adding = functions.add_gym_plan(session["user_id"], description, name)
+        if succesful_adding:
+            return "Salisuunnitelman luominen onnistui"
+        else:
+            return "Salisuunnitelman luonti epäonnistui"
+
+@app.route("/gym_plans")
+def gym_plans():
+    gym_plans = functions.get_gym_plans(session["user_id"])
+    return render_template("gym_plans.html", plans=gym_plans)

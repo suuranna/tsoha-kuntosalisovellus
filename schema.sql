@@ -16,6 +16,7 @@ CREATE TABLE machines {
 CREATE TABLE gym_plans {
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users,
+    name TEXT NOT NULL,
     description TEXT,
     created TIMESTAMP,
     deleted BOOLEAN

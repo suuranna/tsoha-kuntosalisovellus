@@ -1,0 +1,16 @@
+Salisuunnitelmat
+
+<a href="/add_gym_plan">Luo uusi salisuunnitelma</a>
+
+
+Omat salisuunnitelmat:
+
+{% for plan in plans %}
+<hr>
+Nimi: {{ plan[] }} <br>
+Kuvaus: {{ plan[] }} <br>
+| tarkastele ja muokkaa | poista | 
+
+{% endfor %}
+
+
