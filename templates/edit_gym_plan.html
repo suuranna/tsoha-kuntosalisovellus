@@ -16,14 +16,15 @@ Vastustiedot: {{ machine[4] }} <br>
 Lisätiedot: {{machine[5]}} <br>
 
 {% endfor %}
+<hr>
 
 <h4>Lisää cardiolaite:</h4>
 Valitse laite:
 <SELECT name="c_machine">
 {% for machine in c_machines%}
 <option value="{{ machine[0] }}">{{ machine[1] }}</option>
-</SELECT>
 {% endfor %}
+</SELECT> <br>
 Kerro kuinka pitkän lämmittelyn teet tällä laitteella ajallisesti: <br>
 <textarea name="time_info" rows="5" cols="40"></textarea> <br>
 Kerro minkälaisella vastuksella/nopeudella/tasolla käytätä laitetta:<br>
