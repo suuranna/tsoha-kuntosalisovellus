@@ -26,8 +26,8 @@ CREATE TABLE strength_machine_in_a_plan {
     id SERIAL PRIMARY KEY,
     machine_id INTEGER REFERENCES machines,
     gym_plan_id INTEGER REFERENCES gym_plans,
-    weigth_info TEXT NOT NULL,
-    reps_info TEXT NOT NULL,
+    weight_info TEXT,
+    reps_info TEXT,
     additional_info TEXT
 };
 
@@ -35,8 +35,8 @@ CREATE TABLE cardio_machine_in_a_plan {
     id SERIAL PRIMARY KEY,
     machine_id INTEGER REFERENCES machines,
     gym_plan_id INTEGER REFERENCES gym_plans,
-    time_info TEXT NOT NULL,
-    resistance_info TEXT NOT NULL,
+    time_info TEXT,
+    resistance_info TEXT,
     additional_info TEXT
 };
 
