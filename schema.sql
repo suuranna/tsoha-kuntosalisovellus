@@ -22,13 +22,12 @@ CREATE TABLE gym_plans {
     deleted BOOLEAN
 };
 
-
 CREATE TABLE strength_machine_in_a_plan {
     id SERIAL PRIMARY KEY,
     machine_id INTEGER REFERENCES machines,
     gym_plan_id INTEGER REFERENCES gym_plans,
-    weigth_info TEXT,
-    reps_info TEXT,
+    weigth_info TEXT NOT NULL,
+    reps_info TEXT NOT NULL,
     additional_info TEXT
 };
 
@@ -36,9 +35,8 @@ CREATE TABLE cardio_machine_in_a_plan {
     id SERIAL PRIMARY KEY,
     machine_id INTEGER REFERENCES machines,
     gym_plan_id INTEGER REFERENCES gym_plans,
-    time_info TEXT,
-    resistance_info TEXT,
-    reps_info TEXT,
+    time_info TEXT NOT NULL,
+    resistance_info TEXT NOT NULL,
     additional_info TEXT
 };
 

@@ -42,7 +42,36 @@ def add_gym_plan(user_id, description, name):
     return True
 
 def get_gym_plans(user_id):
-    sql = "select name, description, created from gym_plans where user_id=:user_id and deleted=False"
+    sql = "select name, description, created, id from gym_plans where user_id=:user_id and deleted=False"
     result = db.session.execute(sql, {"user_id":user_id})
     plans = result.fetchall()
     return plans
+
+def get_s_machines_in_a_plan(plan_id):
+    sql = "select m.name, m.targeted_muscles, m.in_order, s.weight_info, s.reps_info, s.additional_info from machines m, strength_machine_in_a_plan s where m.id=s.machine_id and s.gym_plan_id=:plan_id"
+    result = db.session.execute(sql, {"plan_id":plan_id})
+    machines = result.fetchall()
+    return machines
+
+def get_c_machines_in_a_plan(plan_id):
+    sql = "select m.name, m.targeted_muscles, m.in_order, c.time_info, c.resistance_info, c.additional_info from machines m, cardio_machine_in_a_plan c where m.id=c.machine_id and c.gym_plan_id=:plan_id"
+    result = db.session.execute(sql, {"plan_id":plan_id})
+    machines = result.fetchall()
+    return machines
+
+def get_machines(machine_type):
+    sql = "select id, name from machines where machine_type=:machine_type"
+    result = db.session.execute(sql, {"machine_type":machine_type})
+    machines = result.fetchall()
+    return machines
+
+def add_c_machine_in_a_plan(machine_id, gym_plan_id, time_info, resistance_info, additional_info):
+    try:
+        sql = "insert into cardio_machine_in_a_plan (machine_id, gym_plan_id, time_info, resistance_info, additional_info) values (:machine_id, :gym_plan_id, :time_info, :resistance_info, :additional_info)"
+        result = db.session.execute(sql, {"machine_id":machine_id, "gym_plan_id":gym_plan_id, "time_info":time_info, "resistance_info":resistance_info, "additional_info":additional_info})
+        db.session.commit()
+        #return True
+    except:
+        return False
+    return True
+

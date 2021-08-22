@@ -1,0 +1,46 @@
+<form action="/edit_gym_plan/{{ id }}" method="POST">
+
+<h1>Muokkaa salisuunnitelmaa</h1>
+<br>
+<h2>Suunnitelman laitteet:</h2>
+<h3>Suunnitelman cardiolaitteet:</h3>
+
+{% for machine in c_m_in_a_plan %}
+<hr>
+Laitteen nimi: {{ machine[0] }}<br>
+{% if not machine[2] %}
+LAITE EI OLE KÄYTÖSSÄ <br>
+{% endif %}
+Aikatiedot: {{ machine[3] }} <br>
+Vastustiedot: {{ machine[4] }} <br>
+Lisätiedot: {{machine[5]}} <br>
+
+{% endfor %}
+
+<h4>Lisää cardiolaite:</h4>
+Valitse laite:
+<SELECT name="c_machine">
+{% for machine in c_machines%}
+<option value="{{ machine[0] }}">{{ machine[1] }}</option>
+</SELECT>
+{% endfor %}
+Kerro kuinka pitkän lämmittelyn teet tällä laitteella ajallisesti: <br>
+<textarea name="time_info" rows="5" cols="40"></textarea> <br>
+Kerro minkälaisella vastuksella/nopeudella/tasolla käytätä laitetta:<br>
+<textarea name="resistance_info" rows="5" cols="40"></textarea> <br>
+Lisätietoja: <br>
+<textarea name="additional_info" rows="5" cols="40"></textarea> <br>
+<input type="submit" value="Lisää cardiolaite">
+
+<h3>Suunnitelman voimalaitteet:</h3>
+
+{% for machine in s_m_in_a_plan %}
+<hr>
+Laitteen nimi: <br>
+Lihakset, joihin liike kohdistuu: <br>
+Painotiedot: <br>
+Toistotiedot: <br>
+Lisätiedot: <br>
+
+{% endfor %}
+
