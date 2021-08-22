@@ -3,7 +3,8 @@
 <h1>Muokkaa salisuunnitelmaa</h1>
 <br>
 <h2>Suunnitelman laitteet:</h2>
-<h3>Suunnitelman cardiolaitteet:</h3>
+
+<h3>Suunnitelmaan lisätyt aerobiset laitteet:</h3>
 
 {% for machine in c_m_in_a_plan %}
 <hr>
@@ -14,34 +15,53 @@ LAITE EI OLE KÄYTÖSSÄ <br>
 Aikatiedot: {{ machine[3] }} <br>
 Vastustiedot: {{ machine[4] }} <br>
 Lisätiedot: {{machine[5]}} <br>
+{% endfor %}
+
+<h3>Suunnitelmaan lisätyt voimalaitteet:</h3>
+
+{% for machine in s_m_in_a_plan %}
+<hr>
+Laitteen nimi: {{ machine[0] }}
+{% if not machine[2] %}
+LAITE EI OLE KÄYTÖSSÄ <br>
+{% endif %}
+Lihakset, joihin liike kohdistuu: {{ machine[1] }} <br>
+Painotiedot: {{ machine[3] }} <br>
+Toistotiedot: {{ machine[4] }} <br>
+Lisätiedot: {{ machine[5] }} <br>
 
 {% endfor %}
-<hr>
 
-<h4>Lisää cardiolaite:</h4>
+<hr>
+<h2>Lisää uusi laite suunnitelmaan</h2>
+<h4>Lisää aerobinen laite:</h4>
 Valitse laite:
 <SELECT name="c_machine">
 {% for machine in c_machines%}
 <option value="{{ machine[0] }}">{{ machine[1] }}</option>
 {% endfor %}
 </SELECT> <br>
-Kerro kuinka pitkän lämmittelyn teet tällä laitteella ajallisesti: <br>
+Kerro kuinka pitkän session teet tällä laitteella ajallisesti: <br>
 <textarea name="time_info" rows="5" cols="40"></textarea> <br>
-Kerro minkälaisella vastuksella/nopeudella/tasolla käytätä laitetta:<br>
+Kerro minkälaisella vastuksella/nopeudella/tasolla jne. käytät laitetta:<br>
 <textarea name="resistance_info" rows="5" cols="40"></textarea> <br>
-Lisätietoja: <br>
+Lisätietoja (esim. laitteen asetukset, istuimen korkeus, juomatauot ym.): <br>
 <textarea name="additional_info" rows="5" cols="40"></textarea> <br>
-<input type="submit" value="Lisää cardiolaite">
+<input type="submit" name="button" value="Lisää aerobinen laite">
 
-<h3>Suunnitelman voimalaitteet:</h3>
-
-{% for machine in s_m_in_a_plan %}
-<hr>
-Laitteen nimi: <br>
-Lihakset, joihin liike kohdistuu: <br>
-Painotiedot: <br>
-Toistotiedot: <br>
-Lisätiedot: <br>
-
+<h4>Lisää voimailulaite:</h4>
+Valitse laite:
+<SELECT name="s_machine">
+{% for machine in s_machines %}
+<option value="{{ machine[0] }}">{{ machine[1] }}</option>
 {% endfor %}
+</SELECT> <br>
+Kerro minkälaisilla painoilla teet toistoja: <br>
+<textarea name="weight_info" rows="5" cols="40"></textarea> <br>
+Kerro montako sarjaa ja toistoa teet:<br>
+<textarea name="reps_info" rows="5" cols="40"></textarea> <br>
+Lisätietoja (esim. laitteen asetukset tai mahdolliset lisävälineet): <br>
+<textarea name="additional_info" rows="5" cols="40"></textarea> <br>
+<input type="submit" name="button" value="Lisää voimailulaite">
+
 

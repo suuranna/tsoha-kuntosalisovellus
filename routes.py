@@ -81,11 +81,20 @@ def edit_gym_plan(id):
         s_m_in_a_plan = functions.get_s_machines_in_a_plan(id)
         return render_template("edit_gym_plan.html", id=id, c_machines=c_machines, s_machines=s_machines, c_m_in_a_plan=c_m_in_a_plan, s_m_in_a_plan=s_m_in_a_plan)
     if request.method == "POST":
-        machine_id = request.form["c_machine"]
-        time_info = request.form["time_info"]
-        resistance_info = request.form["resistance_info"]
-        additional_info = request.form["additional_info"]
-        succesful_adding = functions.add_c_machine_in_a_plan(machine_id, id, time_info, resistance_info, additional_info)
+        if request.form["button"] == "Lisää aerobinen laite":
+            machine_id = request.form["c_machine"]
+            time_info = request.form["time_info"]
+            resistance_info = request.form["resistance_info"]
+            additional_info = request.form["additional_info"]
+            succesful_adding = functions.add_c_machine_in_a_plan(machine_id, id, time_info, resistance_info, additional_info)
+        elif request.form["button"] == "Lisää voimailulaite":
+            machine_id = request.form["s_machine"]
+            weight_info = request.form["weight_info"]
+            reps_info = request.form["reps_info"]
+            additional_info = request.form["additional_info"]
+            succesful_adding = functions.add_s_machine_in_a_plan(machine_id, id, weight_info, reps_info, additional_info)
+        else:
+            return "Virhe!"
         if succesful_adding:
             return "Laitteen lisääminen onnistui!"
         else:

@@ -12,7 +12,6 @@ def sign_up(username, hash_value):
         sql = "insert into users (username, password, admin) values (:username, :password, False)"
         db.session.execute(sql, {"username":username, "password":hash_value})
         db.session.commit()
-        #return True
     except:
         return False
     return True
@@ -36,7 +35,6 @@ def add_gym_plan(user_id, description, name):
         sql = "insert into gym_plans (user_id, name, description, created, deleted) values (:user_id, :name, :description, NOW(), False)"
         result = db.session.execute(sql, {"user_id":user_id, "name":name, "description":description})
         db.session.commit()
-        #return True
     except:
         return False
     return True
@@ -70,8 +68,15 @@ def add_c_machine_in_a_plan(machine_id, gym_plan_id, time_info, resistance_info,
         sql = "insert into cardio_machine_in_a_plan (machine_id, gym_plan_id, time_info, resistance_info, additional_info) values (:machine_id, :gym_plan_id, :time_info, :resistance_info, :additional_info)"
         result = db.session.execute(sql, {"machine_id":machine_id, "gym_plan_id":gym_plan_id, "time_info":time_info, "resistance_info":resistance_info, "additional_info":additional_info})
         db.session.commit()
-        #return True
     except:
         return False
     return True
 
+def add_s_machine_in_a_plan(machine_id, gym_plan_id, weight_info, reps_info, additional_info):
+    try:
+        sql = "insert into strength_machine_in_a_plan (machine_id, gym_plan_id, weight_info, reps_info, additional_info) values (:machine_id, :gym_plan_id, :weight_info, :reps_info, :additional_info)"
+        result = db.session.execute(sql, {"machine_id":machine_id, "gym_plan_id":gym_plan_id, "weight_info":weight_info, "reps_info":reps_info, "additional_info":additional_info})
+        db.session.commit()
+    except:
+        return False
+    return True
