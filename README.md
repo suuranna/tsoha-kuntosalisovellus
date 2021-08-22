@@ -2,7 +2,8 @@
 
 ### Missä vaiheessa sovellukseni on?
 
-Tällä hetkellä sovelluksessa on vain sisään kirjautuminen ja käyttäjätunnuksen luominen. 
+Tällä hetkellä sovelluksessa toimii sisään- ja uloskirjautuminen 
+sekä salisuunnitelman luominen ja siihen cardiolaitteiden lisääminen.
 
 [Linkki Herokuun](https://tsoha-kuntosalisovellus.herokuapp.com)
 
