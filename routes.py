@@ -14,7 +14,7 @@ def login():
     password = request.form["password"]
     hashed_password = functions.get_password(username)
     if hashed_password == None:
-        return "Virhe!"
+        return render_template("message.html", route="/", message1="Väärä käyttäjätunnus tai salasana", message2="Siirry takaisin kirjautumiseen")
     else:
         hash_value = hashed_password[0]
         if check_password_hash(hash_value,password):
@@ -23,7 +23,7 @@ def login():
             session["user_id"] = functions.get_user_id(username)
             return redirect("/")
         else:
-            return "Virhe!"
+            return render_template("message.html", route="/", message1="Väärä käyttäjätunnus tai salasana", message2="Siirry takaisin kirjautumiseen")
 
 @app.route("/logout")
 def logout():
@@ -52,7 +52,7 @@ def sign_up_action():
     if successful_sign_up:
         return redirect("/")
     else:
-        return "Käyttäjätunnuksen luonti epäonnistui"
+        return render_template("message.html", message1="Käyttäjätunnuksen luonti epäonnistui", route="/sign_up", message2="Siirry takaisin käyttäjätunnuksenluontiin")
 
 @app.route("/add_gym_plan", methods=["GET", "POST"])
 def add_gym_plan():
@@ -63,9 +63,9 @@ def add_gym_plan():
         description = request.form["description"]
         succesful_adding = functions.add_gym_plan(session["user_id"], description, name)
         if succesful_adding:
-            return "Salisuunnitelman luominen onnistui"
+            return render_template("message.html", message1="Kuntosalisuunnitelman luominen onnistui", message2="Siirry takaisin omiin kuntosalisuunnitelmiin", route="/gym_plans")
         else:
-            return "Salisuunnitelman luonti epäonnistui"
+            return render_template("message.html", message1="Salisuunnitelman luonti epäonnistui", message2="Yritä uudelleen", route="/add_gym_plan")
 
 @app.route("/delete_gym_plan/<int:id>", methods=["GET", "POST"])
 def delete_gym_plan(id):
@@ -73,7 +73,7 @@ def delete_gym_plan(id):
         return render_template("delete_gym_plan.html", id=id)
     if request.method == "POST":
         functions.delete_gym_plan(id)
-        return redirect("/gym_plans")
+        return render_template("message.html", message1="Kuntosalisuunnitelman poistaminen onnistui", route="/gym_plans", message2="Siirry takaisin kuntosalisuunnitelmiin")
 
 @app.route("/gym_plans")
 def gym_plans():
@@ -104,7 +104,8 @@ def edit_gym_plan(id):
         else:
             return "Virhe!"
         if succesful_adding:
-            return "Laitteen lisääminen onnistui!"
+            return render_template("message.html", message1="Laitteen lisääminen onnistui!", message2="Takaisin muokkaamaan kuntosalisuunnitelmaa", route="/edit_gym_plan/"+str(id))
         else:
-            return "Laitteen lisääminen epäonnistui"
+            return render_template("message.html", message1="Laitteen lisääminen epäonnistui", message2="Yritä uudelleen", route="/edit_gym_plan/"+str(id))
+
 
