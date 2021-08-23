@@ -2,9 +2,9 @@
 
 ### Missä vaiheessa sovellukseni on?
 
-Tällä hetkellä sovelluksessa toimii sisään- ja uloskirjautuminen 
-sekä salisuunnitelman luominen, joihin voi lisätä aerobisia laitteita
-ja voimailulaitteita.
+Tällä hetkellä sovelluksessa toimii sisään- ja uloskirjautuminen, 
+salisuunnitelman luominen ja poistaminen sekä aerobisten laitteiden ja voimailulaitteiden
+lisääminen salisuunnitelmaan.
 
 [Linkki Herokuun](https://tsoha-kuntosalisovellus.herokuapp.com)
 
