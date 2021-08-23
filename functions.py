@@ -80,3 +80,8 @@ def add_s_machine_in_a_plan(machine_id, gym_plan_id, weight_info, reps_info, add
     except:
         return False
     return True
+
+def delete_gym_plan(id):
+    sql = "update gym_plans set deleted=True where id=:id"
+    result = db.session.execute(sql, {"id":id})
+    db.session.commit()

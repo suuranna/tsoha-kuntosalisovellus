@@ -67,6 +67,14 @@ def add_gym_plan():
         else:
             return "Salisuunnitelman luonti epäonnistui"
 
+@app.route("/delete_gym_plan/<int:id>", methods=["GET", "POST"])
+def delete_gym_plan(id):
+    if request.method == "GET":
+        return render_template("delete_gym_plan.html", id=id)
+    if request.method == "POST":
+        functions.delete_gym_plan(id)
+        return redirect("/gym_plans")
+
 @app.route("/gym_plans")
 def gym_plans():
     gym_plans = functions.get_gym_plans(session["user_id"])
