@@ -12,7 +12,7 @@ aerobinen <br>
 {% endif %}
 Treenattavat lihakset: {{ machine[2] }} <br>
 | <a href="/edit_machine/{{ machine[0] }}">Muokkaa tämän laitteen tietoja</a> | 
-<a href="/delete_machine({{ machine[0] }}">Poista tämä laite käytöstä</a>
+<a href="/change_in_order/{{ machine[0] }}">Poista tämä laite käytöstä</a>
 <hr>
 {% endif %}
 {% endfor %}
@@ -29,6 +29,9 @@ lihaksia treenaava <br>
 aerobinen <br>
 {% endif %}
 Treenattavat lihakset: {{ machine[2] }} <br>
+| <a href="/edit_machine/{{ machine[0] }}">Muokkaa tämän laitteen tietoja</a> |
+<a href="/change_in_order/{{ machine[0] }}">Laita tämä laite takaisin käyttöön</a>
+<hr>
 {% endif %}
 {% endfor %}
 

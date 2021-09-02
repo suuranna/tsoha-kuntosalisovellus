@@ -116,6 +116,21 @@ def machines():
     if request.method == "POST":
         return "yas"
 
+@app.route("/change_in_order/<int:id>", methods=["GET", "POST"])
+def change_in_order(id):
+    in_order = functions.get_in_order(id)
+    if request.method == "GET":
+        if in_order:
+            question = "Haluatko poistaa tämän laitteen käytöstä?"
+            submit = "Haluan poistaa tämän laitteen käytöstä"
+        else:
+            question = "Haluatko laittaa tämän laitteen käyttöön?"
+            submit = "Haluan laittaa tämän laitteen käyttöön"
+        return render_template("change_in_order.html", question=question, submit=submit, id=id)
+    if request.method == "POST":
+        functions.change_in_order(id, in_order)
+        return render_template("message.html", route="/machines", message1="Laitteen käytössä-tila on vaihdettu onnistuneesti", message2="Siirry takaisin laitteisiin")
+
 @app.route("/edit_machine/<int:id>", methods=["GET", "POST"])
 def edit_machine(id):
     if request.method == "GET":
@@ -132,3 +147,4 @@ def edit_machine(id):
         if name == "" or target == "" or type == "":
             return render_template("message.html", message1="Kirjoita jokaiseen kenttään jotakin", message2="Yritä uudelleen", route="/edit_machine/"+str(id))
         return render_template("message.html", message1="Laitteen tietojen muokkaus onnistui", message2="Siirry takaisin laitteisiin", route="/machines")
+

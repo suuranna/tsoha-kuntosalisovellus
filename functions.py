@@ -59,11 +59,11 @@ def get_c_machines_in_a_plan(plan_id):
 
 def get_machines(machine_type):
     if machine_type == "all":
-        sql = "select * from machines order by in_order"
+        sql = "select * from machines"
         result = db.session.execute(sql)
         machines = result.fetchall()
     else:
-        sql = "select id, name from machines where machine_type=:machine_type"
+        sql = "select id, name from machines where machine_type=:machine_type and in_order=True"
         result = db.session.execute(sql, {"machine_type":machine_type})
         machines = result.fetchall()
     return machines
@@ -102,3 +102,17 @@ def edit_machine(id, name, target, type):
     result = db.session.execute(sql, {"id":id, "name":name, "target":target, "type":type})
     db.session.commit()
 
+def change_in_order(id, in_order):
+    if in_order:
+        in_order = False
+    else:
+        in_order = True
+    sql = "update machines set in_order=:in_order where id=:id"
+    result = db.session.execute(sql, {"id":id, "in_order":in_order})
+    db.session.commit()
+
+def get_in_order(id):
+    sql = "select in_order from machines where id=:id"
+    result = db.session.execute(sql, {"id":id})
+    in_order = result.fetchone()[0]
+    return in_order
