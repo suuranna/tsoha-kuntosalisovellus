@@ -40,3 +40,18 @@ CREATE TABLE cardio_machine_in_a_plan {
     additional_info TEXT
 };
 
+CREATE TABLE gym_visits {
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users,
+    date TIMESTAMP,
+    additional_info TEXT
+};
+
+CREATE TABLE achievements {
+    id SERIAL PRIMARY KEY,
+    user_id INTEGRE REFERENCES users,
+    machine_id INTEGER REFERENCES machines,
+    gym_plan_id INTEGER,
+    achievement TEXT,
+    date TIMESTAMP
+};

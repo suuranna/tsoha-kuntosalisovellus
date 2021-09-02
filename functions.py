@@ -58,10 +58,21 @@ def get_c_machines_in_a_plan(plan_id):
     return machines
 
 def get_machines(machine_type):
-    sql = "select id, name from machines where machine_type=:machine_type"
-    result = db.session.execute(sql, {"machine_type":machine_type})
-    machines = result.fetchall()
+    if machine_type == "all":
+        sql = "select * from machines order by in_order"
+        result = db.session.execute(sql)
+        machines = result.fetchall()
+    else:
+        sql = "select id, name from machines where machine_type=:machine_type"
+        result = db.session.execute(sql, {"machine_type":machine_type})
+        machines = result.fetchall()
     return machines
+
+def get_one_machine(id):
+    sql = "select * from machines where id=:id"
+    result = db.session.execute(sql, {"id":id})
+    machine = result.fetchone()
+    return machine
 
 def add_c_machine_in_a_plan(machine_id, gym_plan_id, time_info, resistance_info, additional_info):
     try:
@@ -85,3 +96,9 @@ def delete_gym_plan(id):
     sql = "update gym_plans set deleted=True where id=:id"
     result = db.session.execute(sql, {"id":id})
     db.session.commit()
+
+def edit_machine(id, name, target, type):
+    sql = "update machines set name=:name, targeted_muscles=:target, machine_type=:type where id=:id"
+    result = db.session.execute(sql, {"id":id, "name":name, "target":target, "type":type})
+    db.session.commit()
+

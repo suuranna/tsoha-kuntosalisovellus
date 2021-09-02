@@ -108,4 +108,27 @@ def edit_gym_plan(id):
         else:
             return render_template("message.html", message1="Laitteen lisääminen epäonnistui", message2="Yritä uudelleen", route="/edit_gym_plan/"+str(id))
 
+@app.route("/machines", methods=["GET", "POST"])
+def machines():
+    if request.method == "GET":
+        machines = functions.get_machines("all")
+        return render_template("machines.html", machines=machines)
+    if request.method == "POST":
+        return "yas"
 
+@app.route("/edit_machine/<int:id>", methods=["GET", "POST"])
+def edit_machine(id):
+    if request.method == "GET":
+        machine = functions.get_one_machine(id)
+        return render_template("edit_machine.html", id=id, machine=machine)
+    if request.method == "POST":
+        type = request.form["type"]
+        if type == "empty":
+            return render_template("message.html", message2="Yritä uudelleen", route="/edit_machine/"+str(id), message1="Laitteen tietojen muokkaaminen epäonnistui, koska laitteen tyyppi jätettiin valitsematta.")
+        name = request.form["name"]
+        target = request.form["target"]
+        type = request.form["type"]
+        functions.edit_machine(id, name, target, type)
+        if name == "" or target == "" or type == "":
+            return render_template("message.html", message1="Kirjoita jokaiseen kenttään jotakin", message2="Yritä uudelleen", route="/edit_machine/"+str(id))
+        return render_template("message.html", message1="Laitteen tietojen muokkaus onnistui", message2="Siirry takaisin laitteisiin", route="/machines")

@@ -1,0 +1,34 @@
+<h2>Kuntosalin laitteet</h2>
+<h3>Käytössä olevat laitteet</h3>
+<hr>
+{% for machine in machines %}
+{% if machine[4] %}
+Laitteen nimi: {{ machine[1] }} <br>
+Laitteen tyyppi: 
+{% if machine[3] == "strength" %}
+lihaksia treenaava <br>
+{% else %}
+aerobinen <br>
+{% endif %}
+Treenattavat lihakset: {{ machine[2] }} <br>
+| <a href="/edit_machine/{{ machine[0] }}">Muokkaa tämän laitteen tietoja</a> | 
+<a href="/delete_machine({{ machine[0] }}">Poista tämä laite käytöstä</a>
+<hr>
+{% endif %}
+{% endfor %}
+
+<h3>Poissa käytössä olevat laitteet</h3>
+
+{% for machine in machines %}
+{% if not machine[4] %}
+Laitteen nimi: {{ machine[1] }} <br>
+Laitteen tyyppi:                     
+{% if machine[3] == "strength" %}
+lihaksia treenaava <br>
+{% else %}
+aerobinen <br>
+{% endif %}
+Treenattavat lihakset: {{ machine[2] }} <br>
+{% endif %}
+{% endfor %}
+

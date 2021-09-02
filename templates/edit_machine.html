@@ -1,0 +1,16 @@
+<form action="/edit_machine/{{ id }}" method="POST">
+<h3>Muokkaa laitteen tietoja</h3>
+Laitteen nimi: 
+<input type="text" name="name" value="{{ machine[1] }}"> <br>
+Treenattavat lihakset: <br>
+<textarea name="target" rows="2" cols="20">{{ machine[2] }}</textarea> <br>
+Laitteen tyyppi: 
+<select name="type">
+<option value="empty"></option>
+<option value="strength">Lihaksia treenaava</option>
+<option value="cardio">Aerobinen</option>
+</select>
+<br>
+| <a href="/machines">Peruuta</a> 
+| <input type="submit" name="button" value="Tallenna muutokset"> |
+

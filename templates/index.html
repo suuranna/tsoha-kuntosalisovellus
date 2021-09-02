@@ -6,12 +6,11 @@ Olet kirjautuneena nimellä {{ session.username }} |
 <a href="/logout">Kirjaudu ulos</a>
 <hr>
 
-<a href="/gym_plans">Tarkastele omia saliohjelmia</a>
+<a href="/gym_plans">Tarkastele omia saliohjelmia</a> <br> 
 
 {% if session.admin %}
 
-Hallinnoi salin laitteita:
-<a href="/">Lisää salille uusi laite</a> |
+<a href="/machines">Hallinnoi salin laitteita</a> 
  
 
 {% endif %}
