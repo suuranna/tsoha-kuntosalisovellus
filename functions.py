@@ -116,3 +116,8 @@ def get_in_order(id):
     result = db.session.execute(sql, {"id":id})
     in_order = result.fetchone()[0]
     return in_order
+
+def new_machine(name, type, target):
+    sql = "insert into machines (name, targeted_muscles, machine_type, in_order) values (:name, :target, :type, True)"
+    result = db.session.execute(sql, {"name":name, "target":target, "type":type})
+    db.session.commit()

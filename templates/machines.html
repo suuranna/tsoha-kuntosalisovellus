@@ -1,4 +1,18 @@
+<form action="/machines" method="POST">
 <h2>Kuntosalin laitteet</h2>
+<h3>Lisää salille uusi laite</h3>
+Laitteen nimi: <br>
+<input type="text" name="name"> <br>
+Treenattavat lihakset: <br>
+<textarea name="target" rows="2" cols="40"></textarea> <br>
+Onko laite aerobinen vai lihaksia treenaava?:
+<select name="type">
+<option value="strength">Lihaksia treenaava</option>
+<option value="cardio">Aerobinen</option>
+</select>
+<br>
+<input type="submit" name="button" value="Lisää uusi laite">
+
 <h3>Käytössä olevat laitteet</h3>
 <hr>
 {% for machine in machines %}

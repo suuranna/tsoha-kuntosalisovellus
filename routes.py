@@ -114,7 +114,12 @@ def machines():
         machines = functions.get_machines("all")
         return render_template("machines.html", machines=machines)
     if request.method == "POST":
-        return "yas"
+        name = request.form["name"]
+        target = request.form["target"]
+        type = request.form["type"]
+        #tarkista syöte
+        functions.new_machine(name, type, target)
+        return render_template("message.html", route="/machines", message1="Laite lisätty onnistuneesti", message2="Palaa takaisin laitteisiin")
 
 @app.route("/change_in_order/<int:id>", methods=["GET", "POST"])
 def change_in_order(id):

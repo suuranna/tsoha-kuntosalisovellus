@@ -6,7 +6,7 @@
 <hr>
 Nimi: {{ plan[0] }} <br>
 Kuvaus: {{ plan[1] }} <br>
-Luotu: {{ plan[2] }} <br>
+Luotu: {{ plan[2].strftime("%d.%m.%Y klo %H:%M:%S") }} <br>
 | <a href="/edit_gym_plan/{{ plan[3] }}">tarkastele ja muokkaa</a> 
 | <a href="/delete_gym_plan/{{ plan[3] }}">Poista tämä salisuunnitelma</a> | 
 
