@@ -149,6 +149,8 @@ def edit_gym_plan(id):
 
 @app.route("/machines", methods=["GET", "POST"])
 def machines():
+    if not session["admin"]:
+        return render_template("message.html", message1="Sinulla ei ole oikeutta hallinnoida salin laitteita", message2="Siirry etusivulle", route="/")
     if request.method == "GET":
         machines = functions.get_machines("all")
         return render_template("machines.html", machines=machines)
@@ -162,6 +164,8 @@ def machines():
 
 @app.route("/change_in_order/<int:id>", methods=["GET", "POST"])
 def change_in_order(id):
+    if not session["admin"]:
+        return render_template("message.html", message1="Sinulla ei ole oikeutta hallinnoida salin laitteita", message2="Siirry etusivulle", route="/")
     in_order = functions.get_in_order(id)
     if request.method == "GET":
         if in_order:
@@ -177,6 +181,8 @@ def change_in_order(id):
 
 @app.route("/edit_machine/<int:id>", methods=["GET", "POST"])
 def edit_machine(id):
+    if not session["admin"]:
+        return render_template("message.html", message1="Sinulla ei ole oikeutta hallinnoida salin laitteita", message2="Siirry etusivulle", route="/")
     if request.method == "GET":
         machine = functions.get_one_machine(id)
         return render_template("edit_machine.html", id=id, machine=machine)
