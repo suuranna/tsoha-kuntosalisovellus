@@ -6,7 +6,9 @@ import functions
 
 @app.route("/")
 def index():
-    amount = functions.count_gym_plans(session["user_id"])
+    amount = 0
+    if session["username"]:
+        amount = functions.count_gym_plans(session["user_id"])
     return render_template("index.html", amount=amount)
 
 @app.route("/login",methods=["POST"])
@@ -63,6 +65,8 @@ def edit_achievement(id):
 @app.route("/logout")
 def logout():
     del session["username"]
+    del session["user_id"]
+    del session["admin"]
     return redirect("/")
 
 @app.route("/sign_up")
