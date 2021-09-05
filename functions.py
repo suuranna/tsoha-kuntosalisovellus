@@ -179,7 +179,7 @@ def edit_gym_plan_info(id, name, description):
     db.session.commit()
 
 def get_achievements(user_id):
-    sql = "select a.machine_id, m.name, a.achievement, a.date from machines m, achievements a where a.user_id=:user_id and m.id=a.machine_id"
+    sql = "select a.machine_id, m.name, a.achievement, a.date, a.id from machines m, achievements a where a.user_id=:user_id and m.id=a.machine_id"
     result = db.session.execute(sql, {"user_id":user_id})
     achievements = result.fetchall()
     return achievements

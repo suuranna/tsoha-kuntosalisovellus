@@ -10,8 +10,8 @@ Laitteen nimi, jolla saavutus tehtiin: {{ achievement[1] }} <br>
 Saavutus: {{ achievement[2] }} <br>
 Saavutuksen kirjaamisajankohta: {{ achievement[3].strftime("%d.%m.%Y klo %H:%M:%S") }}
 <br>
-<a href="/edit_achievement/{{ achievement[0] }}">Muokkaa saavutusta</a> | 
-<a href="/delete_achievement/{{ achievement[0] }}">Poista saavutus</a>
+<a href="/edit_achievement/{{ achievement[4] }}">Muokkaa saavutusta</a> | 
+<a href="/delete_achievement/{{ achievement[4] }}">Poista saavutus</a>
 <hr>
 {% endfor %}
 <h3>Lisää uusi saavutus</h3>
