@@ -2,12 +2,14 @@
 
 ### Missä vaiheessa sovellukseni on?
 
-Kaikki sovelluksen perustoi minnallisuudet toimivat, ulkoasu jäi vähän viimeistelemättä ja kaikille syötteille en ehtinyt asettamaan merkkikattoa. Lisäksi jotkut suunnittelemani toiminnallisuudet jäivät totauttamatta.
+Kaikki sovelluksen perustoiminnallisuudet toimivat, ulkoasu jäi vähän viimeistelemättä ja kaikille syötteille en ehtinyt asettamaan merkkikattoa. Lisäksi jotkut suunnittelemani toiminnallisuudet jäivät toteuttamatta.
 
 Sovellusta voi testata peruskäyttäjänä luomalla käyttäjätunnuksen tai ylläpitäjänä käyttämällä tunnuksia:
 
 käyttäjätunnus: ylläpitäjä
 salasana: salasana
+
+(Vain README:tä on muokattu deadlinen jälkeen)
 
 [Linkki Herokuun](https://tsoha-kuntosalisovellus.herokuapp.com)
 
