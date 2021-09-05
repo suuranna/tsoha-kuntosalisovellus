@@ -6,7 +6,8 @@ import functions
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    amount = functions.count_gym_plans(session["user_id"])
+    return render_template("index.html", amount=amount)
 
 @app.route("/login",methods=["POST"])
 def login():
@@ -24,6 +25,10 @@ def login():
             return redirect("/")
         else:
             return render_template("message.html", route="/", message1="Väärä käyttäjätunnus tai salasana", message2="Siirry takaisin kirjautumiseen")
+
+@app.route("/result", methods=["GET"])
+def result():
+    query = request.args["query"]
 
 @app.route("/logout")
 def logout():
@@ -70,7 +75,7 @@ def add_gym_plan():
 @app.route("/delete_gym_plan/<int:id>", methods=["GET", "POST"])
 def delete_gym_plan(id):
     if request.method == "GET":
-        return render_template("delete_gym_plan.html", id=id)
+        return render_template("delete.html", message="Haluatko varmasti poistaa tämän alueen", route="/delete_gym_plan/"+str(id), back="/gym_plans", submit="Haluan poistaa tämän kuntosaliohjelman")
     if request.method == "POST":
         functions.delete_gym_plan(id)
         return render_template("message.html", message1="Kuntosalisuunnitelman poistaminen onnistui", route="/gym_plans", message2="Siirry takaisin kuntosalisuunnitelmiin")
@@ -174,4 +179,22 @@ def edit_gym_plan_machine(type, id):
             functions.edit_s_machine(id, weight_info, reps_info, additional)
         return render_template("message.html", message1="Laitteen treenitietoja muokattu onnituneesti!", message2="Palaa takaisin muokkaamaan salisuunnitelmaa", route="/edit_gym_plan/"+str(gym_plan_id))
 
+@app.route("/delete_machine_from_a_plan/<int:type>/<int:id>", methods=["GET", "POST"])
+def delete_machine_from_a_plan(type, id):
+    if request.method == "GET":
+        route = "/delete_machine_from_a_plan/" + str(type) + "/" + str(id)
+        return render_template("delete.html", route=route, message="Haluatko varmasti poistaa tämän laitteen tästä salisuunnitelmasta?", back="/gym_plans", submit="Poista tämä laite tästä suunnitelmasta")
+    if request.method == "POST":
+        functions.delete_machine_from_a_plan(id, type)
+        return render_template("message.html", message1="Laite poistettu onnistuneesti", message2="Siirry takaisin salisuunnitelmiin", route="/gym_plans")
 
+@app.route("/edit_gym_plan_info/<int:id>", methods=["GET", "POST"])
+def edit_gym_plan_info(id):
+    if request.method == "GET":
+        info = functions.get_gym_plan_info(id)
+        return render_template("edit_gym_plan_info.html", info=info)
+    if request.method == "POST":
+        name = request.form["name"]
+        description = request.form["description"]
+        functions.edit_gym_plan_info(id, name, description)
+        return render_template("message.html", message1="Salisuunnitelman tietoja muutettu onnistuneesti!", message2="Takaisin salisuunnitelmaan", route="/edit_gym_plan/"+str(id))

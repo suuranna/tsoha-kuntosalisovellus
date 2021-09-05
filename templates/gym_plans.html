@@ -1,6 +1,9 @@
-<h1>Omat salisuunnitelmat:</h1>
-<a href="/add_gym_plan">Luo uusi salisuunnitelma</a>
-<br>
+{% extends "layout.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+
+<h2>Omat salisuunnitelmat:</h2>
 
 {% for plan in plans %}
 <hr>
@@ -11,5 +14,6 @@ Luotu: {{ plan[2].strftime("%d.%m.%Y klo %H:%M:%S") }} <br>
 | <a href="/delete_gym_plan/{{ plan[3] }}">Poista tämä salisuunnitelma</a> | 
 
 {% endfor %}
+<h3><a href="/add_gym_plan">Luo uusi salisuunnitelma</a></h3>
 
-
+{% endblock %}

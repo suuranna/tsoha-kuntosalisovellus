@@ -1,3 +1,8 @@
+{% extends "layout.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+
 <form action="/edit_machine/{{ id }}" method="POST">
 <h3>Muokkaa laitteen tietoja</h3>
 Laitteen nimi: 
@@ -14,3 +19,4 @@ Laitteen tyyppi:
 | <a href="/machines">Peruuta</a> 
 | <input type="submit" name="button" value="Tallenna muutokset"> |
 
+{% endblock %}

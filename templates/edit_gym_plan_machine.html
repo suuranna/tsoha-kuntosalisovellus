@@ -1,3 +1,8 @@
+{% extends "layout.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+
 <form action="/edit_gym_plan_machine/{{ type }}/{{ id }}" method="POST">
 <h3>Muokkaa laitteen {{ machine_info[0] }} treenitietoja</h3>
 <input type="hidden" name="gym_plan_id" value="{{ machine_info[4] }}"
@@ -18,3 +23,6 @@ Lisätietoja (esim. laitteen asetukset tai mahdolliset lisävälineet): <br>
 <textarea name="additional_info" rows="5" cols="40">{{ machine_info[3] }}</textarea> <br>
 <input type="submit" name="button" value="Muokkaa laitteen treenitietoja">
 {% endif %}
+<a href="/edit_gym_plan/{{ machine_info[4] }}">Peruuta</a>
+
+{% endblock %}

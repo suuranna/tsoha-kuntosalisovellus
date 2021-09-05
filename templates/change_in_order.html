@@ -1,3 +1,9 @@
+{% extends "layout.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
 <form action="/change_in_order/{{ id }}" method="POST">
 <h3>{{ question }}</h3>
 <a href="/machines">Peruuta</a> | <input type="submit" name="button" value="{{ submit }}">
+
+{% endblock %}

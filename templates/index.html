@@ -1,23 +1,27 @@
+
+{% extends "layout.html" %}
+{% block title %}Otsikko{% endblock %}
+{% block content %}
+
 {% if session.username %}
+<h1>Tervetuloa!</h1>
+<h2>Toiminnot:</h2>
 
-<h1>Kuntosalisovellus</h1>
-
-Olet kirjautuneena nimellä {{ session.username }} |
-<a href="/logout">Kirjaudu ulos</a>
-<hr>
-
-<a href="/gym_plans">Tarkastele omia saliohjelmia</a> <br> 
+<h3><a href="/gym_plans">Tarkastele omia saliohjelmia</a> </h3>
+Omien salisuunnitelmien määrä: {{ amount }}
+<h3><a href="/achievements">Tarkastele omia saavutuksia</a></h3>
+Viimeisin saavutus kirjattu y, <br>
+joka oli laitteella x 
 
 {% if session.admin %}
 
-<a href="/machines">Hallinnoi salin laitteita</a> 
+<h3><a href="/machines">Hallinnoi salin laitteita</a></h3> 
  
-
 {% endif %}
 
 {% else %}
 
-<h2>Kirjaudu sisään</h2>
+<h3>Kirjaudu sisään</h3>
 <form action="/login" method="POST">
 Käyttäjätunnus:
 <input type="text" name="username"><br>
@@ -30,3 +34,5 @@ Salasana:
 
 
 {% endif %}
+
+{% endblock %}

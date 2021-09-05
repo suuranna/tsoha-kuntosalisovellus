@@ -1,0 +1,20 @@
+<!doctype html>
+<title>Kuntosalisuunnitelmasovellus KuSuSo - {% block title %}{% endblock %}</title>
+<h1>Kuntosalisuunnitelmasovellus KuSuSo</h1>
+<hr>
+{% if session.username %}
+Olet kirjautuneena nimellä {{ session.username }} |
+<a href="/logout">Kirjaudu ulos</a> <br>
+<hr>
+<form action="/result" method="GET">
+Etsi kuntosalilaitteita niiden treenamien lihaksien tai lihasryhmien perusteella: 
+<input type="text" name="query">
+<input type="submit" value="Etsi">
+</form>
+<hr>
+| <a href="/">Etusivu</a> | <a href="/gym_plans">Omat kuntosalisuunnitelmat</a> |
+{% endif %}
+<hr>
+<hr>
+{% block content %}{% endblock %}
+<hr>

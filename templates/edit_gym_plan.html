@@ -1,18 +1,20 @@
+{% extends "layout.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+
 <form action="/edit_gym_plan/{{ id }}" method="POST">
 
-<h1>Muokkaa salisuunnitelmaa</h1>
-<br>
-<h2>Suunnitelman tiedot:</h2>
+<h2>Muokkaa salisuunnitelmaa</h2>
+<h3>Suunnitelman tiedot:</h3>
 Suunnitelman nimi: {{ info[2] }} <br>
 Suunnitelman kuvaus: {{ info[3] }} <br>
-Suunnitelman luomisajankohta: {{ info[4] }} <br>
+Suunnitelman luomisajankohta: {{ info[4].strftime("%d.%m.%Y klo %H:%M:%S") }} <br>
 <a href="/edit_gym_plan_info/{{ id }}">Muokkaa suunnitelman tietoja</a>
-<h2>Suunnitelman laitteet:</h2>
+<h3>Suunnitelman laitteet:</h3>
 
-<h3>Suunnitelmaan lisätyt aerobiset laitteet:</h3>
-
+<h4>Suunnitelmaan lisätyt aerobiset laitteet:</h4>
 {% for machine in c_m_in_a_plan %}
-<hr>
 Laitteen nimi: {{ machine[0] }}<br>
 {% if not machine[2] %}
 LAITE EI OLE KÄYTÖSSÄ <br>
@@ -21,14 +23,14 @@ Aikatiedot: {{ machine[3] }} <br>
 Vastustiedot: {{ machine[4] }} <br>
 Lisätiedot: {{machine[5]}} <br>
 <a href="/edit_gym_plan_machine/1/{{ machine[6] }}">Muokkaa laitteen treenitietoja</a> | 
-<a href="/delete_machine_from_a_plan">Poista tämä laite tästä salisuunnitelmasta</a>
+<a href="/delete_machine_from_a_plan/1/{{ machine[6] }}">Poista tämä laite tästä salisuunnitelmasta</a>
+<hr>
 {% endfor %}
 
-<h3>Suunnitelmaan lisätyt voimalaitteet:</h3>
+<h4>Suunnitelmaan lisätyt voimalaitteet:</h4>
 
 {% for machine in s_m_in_a_plan %}
-<hr>
-Laitteen nimi: {{ machine[0] }}
+Laitteen nimi: {{ machine[0] }} <br>
 {% if not machine[2] %}
 LAITE EI OLE KÄYTÖSSÄ <br>
 {% endif %}
@@ -36,12 +38,12 @@ Lihakset, joihin liike kohdistuu: {{ machine[1] }} <br>
 Painotiedot: {{ machine[3] }} <br>
 Toistotiedot: {{ machine[4] }} <br>
 Lisätiedot: {{ machine[5] }} <br>
-<a href="/edit_gym_plan_machine/2/{{ machine[6] }}">Muokkaa laitteen treenitietoja</a> <br>
-
+<a href="/edit_gym_plan_machine/2/{{ machine[6] }}">Muokkaa laitteen treenitietoja</a> | 
+<a href="/delete_machine_from_a_plan/2/{{ machine[6] }}">Poista tämä laite tästä salisuunnitelmasta</a>
+<hr>
 {% endfor %}
 
-<hr>
-<h2>Lisää uusi laite suunnitelmaan</h2>
+<h3>Lisää uusi laite suunnitelmaan</h3>
 <h4>Lisää aerobinen laite:</h4>
 Valitse laite:
 <SELECT name="c_machine">
@@ -72,4 +74,4 @@ Lisätietoja (esim. laitteen asetukset tai mahdolliset lisävälineet): <br>
 <textarea name="additional_info" rows="5" cols="40"></textarea> <br>
 <input type="submit" name="button" value="Lisää voimailulaite">
 
-
+{% endblock %}

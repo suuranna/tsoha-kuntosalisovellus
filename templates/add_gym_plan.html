@@ -1,6 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
 <form action="/add_gym_plan" method="POST">
 
-<p>Salisuunnitelman luonti</p>
+<h2>Salisuunnitelman luonti</h2>
 
 Anna salisuunnitelmalle nimi:
 <input type="text" name="name">
@@ -10,3 +14,4 @@ Kuvaile salisuunnitelmaa: <br>
 <br>
 <input type="submit" value="Luo uusi salisuunnitelma">
 
+{% endblock %}

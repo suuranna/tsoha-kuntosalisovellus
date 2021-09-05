@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}Alueet{% endblock %}
+{% block content %}
+
+<form action="/edit_gym_plan_info/{{ info[0] }}" method="POST">
+
+<h3>Muokkaa salisuunnitelman tietoja</h3>
+
+Anna salisuunnitelmalle nimi:
+<input type="text" name="name" value="{{ info[2] }}">
+<br>
+Kuvaile salisuunnitelmaa: <br>
+<textarea name="description" rows="5" cols="40">{{ info[3] }}</textarea>
+<br>
+<input type="submit" value="Muokkaa salisuunnitelman tietoja">
+
+
+{% endblock %}

@@ -1,3 +1,8 @@
+{% extends "layout.html" %}
+{% block title %}Alueet{% endblock %}
+{% block content %}
+
+
 <form action="/machines" method="POST">
 <h2>Kuntosalin laitteet</h2>
 <h3>Lisää salille uusi laite</h3>
@@ -49,3 +54,4 @@ Treenattavat lihakset: {{ machine[2] }} <br>
 {% endif %}
 {% endfor %}
 
+{% endblock %}

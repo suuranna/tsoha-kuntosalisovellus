@@ -22,6 +22,12 @@ def is_admin(username):
     admin = result.fetchone()[0]
     return admin
 
+def count_gym_plans(id):
+    sql = "select count(*) from gym_plans where deleted=False and user_id=:id"
+    result = db.session.execute(sql, {"id":id})
+    amount = result.fetchone()[0]
+    return amount
+
 def get_user_id(username):
     sql = "select id from users where username=:username"
     result = db.session.execute(sql, {"username":username})
@@ -62,7 +68,7 @@ def get_machine_from_a_plan(id, type):
     if type == 1:
         sql = "select m.name, c.time_info, c.resistance_info, c.additional_info, c.gym_plan_id from machines m, cardio_machine_in_a_plan c where c.id=:id and c.machine_id=m.id"
     if type == 2:
-        sql = "select m.name, s.weight_info, c.reps_info, c.additional_info, s.gym_plan_id from machines m, strength_machine_in_a_plan s where s.id=:id and s.machine_id=m.id"
+        sql = "select m.name, s.weight_info, s.reps_info, s.additional_info, s.gym_plan_id from machines m, strength_machine_in_a_plan s where s.id=:id and s.machine_id=m.id"
     result = db.session.execute(sql, {"id":id})
     machine_info = result.fetchone()
     return machine_info
@@ -107,6 +113,15 @@ def delete_gym_plan(id):
     result = db.session.execute(sql, {"id":id})
     db.session.commit()
 
+def delete_machine_from_a_plan(id, type):
+    sql = ""
+    if type == 1: 
+        sql = "delete from cardio_machine_in_a_plan where id=:id"
+    if type == 2:
+        sql = "delete from strength_machine_in_a_plan where id=:id"
+    result = db.session.execute(sql, {"id":id})
+    db.session.commit()
+
 def edit_machine(id, name, target, type):
     sql = "update machines set name=:name, targeted_muscles=:target, machine_type=:type where id=:id"
     result = db.session.execute(sql, {"id":id, "name":name, "target":target, "type":type})
@@ -147,3 +162,8 @@ def get_gym_plan_info(id):
     result = db.session.execute(sql, {"id":id})
     info = result.fetchone()
     return info
+
+def edit_gym_plan_info(id, name, description):
+    sql = "update gym_plans set name=:name, description=:description where id=:id"
+    result = db.session.execute(sql, {"id":id, "name":name, "description":description})
+    db.session.commit()
