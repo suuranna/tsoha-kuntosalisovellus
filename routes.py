@@ -83,11 +83,12 @@ def gym_plans():
 @app.route("/edit_gym_plan/<int:id>", methods=["GET", "POST"])
 def edit_gym_plan(id):
     if request.method == "GET":
+        info = functions.get_gym_plan_info(id)
         c_machines = functions.get_machines("cardio")
         s_machines = functions.get_machines("strength")
         c_m_in_a_plan = functions.get_c_machines_in_a_plan(id)
         s_m_in_a_plan = functions.get_s_machines_in_a_plan(id)
-        return render_template("edit_gym_plan.html", id=id, c_machines=c_machines, s_machines=s_machines, c_m_in_a_plan=c_m_in_a_plan, s_m_in_a_plan=s_m_in_a_plan)
+        return render_template("edit_gym_plan.html", id=id, c_machines=c_machines, s_machines=s_machines, c_m_in_a_plan=c_m_in_a_plan, s_m_in_a_plan=s_m_in_a_plan, info=info)
     if request.method == "POST":
         if request.form["button"] == "Lisää aerobinen laite":
             machine_id = request.form["c_machine"]
@@ -152,4 +153,25 @@ def edit_machine(id):
         if name == "" or target == "" or type == "":
             return render_template("message.html", message1="Kirjoita jokaiseen kenttään jotakin", message2="Yritä uudelleen", route="/edit_machine/"+str(id))
         return render_template("message.html", message1="Laitteen tietojen muokkaus onnistui", message2="Siirry takaisin laitteisiin", route="/machines")
+
+@app.route("/edit_gym_plan_machine/<int:type>/<int:id>", methods=["GET", "POST"])
+def edit_gym_plan_machine(type, id):
+    if request.method == "GET":
+         machine_info = functions.get_machine_from_a_plan(id, type)
+         return render_template("edit_gym_plan_machine.html", type=type, id=id, machine_info=machine_info)
+
+    if request.method == "POST":
+        gym_plan_id = request.form["gym_plan_id"]
+        if type == 1:
+            time_info = request.form["time_info"]
+            resistance = request.form["resistance_info"]
+            additional = request.form["additional_info"]
+            functions.edit_c_machine(id, time_info, resistance, additional)
+        else:
+            weight_info = request.form["weight_info"]
+            reps_info = request.form["reps_info"]
+            additional = request.form["additional_info"]
+            functions.edit_s_machine(id, weight_info, reps_info, additional)
+        return render_template("message.html", message1="Laitteen treenitietoja muokattu onnituneesti!", message2="Palaa takaisin muokkaamaan salisuunnitelmaa", route="/edit_gym_plan/"+str(gym_plan_id))
+
 

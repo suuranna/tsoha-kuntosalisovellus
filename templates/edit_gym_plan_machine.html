@@ -1,0 +1,20 @@
+<form action="/edit_gym_plan_machine/{{ type }}/{{ id }}" method="POST">
+<h3>Muokkaa laitteen {{ machine_info[0] }} treenitietoja</h3>
+<input type="hidden" name="gym_plan_id" value="{{ machine_info[4] }}"
+{% if type == 1 %}
+Kerro kuinka pitkän session teet tällä laitteella ajallisesti: <br>
+<textarea name="time_info" rows="5" cols="40">{{ machine_info[1] }}</textarea> <br>
+Kerro minkälaisella vastuksella/nopeudella/tasolla jne. käytät laitetta:<br>
+<textarea name="resistance_info" rows="5" cols="40">{{ machine_info[2] }}</textarea> <br>
+Lisätietoja (esim. laitteen asetukset, istuimen korkeus, juomatauot ym.): <br>
+<textarea name="additional_info" rows="5" cols="40">{{ machine_info[3] }}</textarea> <br>
+<input type="submit" name="button" value="Muokkaa laitteen treenitietoja">
+{% else %}
+Kerro minkälaisilla painoilla teet toistoja: <br>
+<textarea name="weight_info" rows="5" cols="40">{{ machine_info[1] }}</textarea> <br>
+Kerro montako sarjaa ja toistoa teet:<br>
+<textarea name="reps_info" rows="5" cols="40">{{ machine_info[2] }}</textarea> <br>
+Lisätietoja (esim. laitteen asetukset tai mahdolliset lisävälineet): <br>
+<textarea name="additional_info" rows="5" cols="40">{{ machine_info[3] }}</textarea> <br>
+<input type="submit" name="button" value="Muokkaa laitteen treenitietoja">
+{% endif %}

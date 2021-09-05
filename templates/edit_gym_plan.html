@@ -3,9 +3,10 @@
 <h1>Muokkaa salisuunnitelmaa</h1>
 <br>
 <h2>Suunnitelman tiedot:</h2>
-Suunnitelman nimi: <br>
-Suunnitelman kuvaus: <br>
-Suunnitelman luomisajankohta: 
+Suunnitelman nimi: {{ info[2] }} <br>
+Suunnitelman kuvaus: {{ info[3] }} <br>
+Suunnitelman luomisajankohta: {{ info[4] }} <br>
+<a href="/edit_gym_plan_info/{{ id }}">Muokkaa suunnitelman tietoja</a>
 <h2>Suunnitelman laitteet:</h2>
 
 <h3>Suunnitelmaan lisätyt aerobiset laitteet:</h3>
@@ -19,6 +20,8 @@ LAITE EI OLE KÄYTÖSSÄ <br>
 Aikatiedot: {{ machine[3] }} <br>
 Vastustiedot: {{ machine[4] }} <br>
 Lisätiedot: {{machine[5]}} <br>
+<a href="/edit_gym_plan_machine/1/{{ machine[6] }}">Muokkaa laitteen treenitietoja</a> | 
+<a href="/delete_machine_from_a_plan">Poista tämä laite tästä salisuunnitelmasta</a>
 {% endfor %}
 
 <h3>Suunnitelmaan lisätyt voimalaitteet:</h3>
@@ -33,6 +36,7 @@ Lihakset, joihin liike kohdistuu: {{ machine[1] }} <br>
 Painotiedot: {{ machine[3] }} <br>
 Toistotiedot: {{ machine[4] }} <br>
 Lisätiedot: {{ machine[5] }} <br>
+<a href="/edit_gym_plan_machine/2/{{ machine[6] }}">Muokkaa laitteen treenitietoja</a> <br>
 
 {% endfor %}
 

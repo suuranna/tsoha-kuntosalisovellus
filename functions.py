@@ -46,16 +46,26 @@ def get_gym_plans(user_id):
     return plans
 
 def get_s_machines_in_a_plan(plan_id):
-    sql = "select m.name, m.targeted_muscles, m.in_order, s.weight_info, s.reps_info, s.additional_info from machines m, strength_machine_in_a_plan s where m.id=s.machine_id and s.gym_plan_id=:plan_id"
+    sql = "select m.name, m.targeted_muscles, m.in_order, s.weight_info, s.reps_info, s.additional_info, s.id from machines m, strength_machine_in_a_plan s where m.id=s.machine_id and s.gym_plan_id=:plan_id"
     result = db.session.execute(sql, {"plan_id":plan_id})
     machines = result.fetchall()
     return machines
 
 def get_c_machines_in_a_plan(plan_id):
-    sql = "select m.name, m.targeted_muscles, m.in_order, c.time_info, c.resistance_info, c.additional_info from machines m, cardio_machine_in_a_plan c where m.id=c.machine_id and c.gym_plan_id=:plan_id"
+    sql = "select m.name, m.targeted_muscles, m.in_order, c.time_info, c.resistance_info, c.additional_info, c.id from machines m, cardio_machine_in_a_plan c where m.id=c.machine_id and c.gym_plan_id=:plan_id"
     result = db.session.execute(sql, {"plan_id":plan_id})
     machines = result.fetchall()
     return machines
+
+def get_machine_from_a_plan(id, type):
+    sql = ""
+    if type == 1:
+        sql = "select m.name, c.time_info, c.resistance_info, c.additional_info, c.gym_plan_id from machines m, cardio_machine_in_a_plan c where c.id=:id and c.machine_id=m.id"
+    if type == 2:
+        sql = "select m.name, s.weight_info, c.reps_info, c.additional_info, s.gym_plan_id from machines m, strength_machine_in_a_plan s where s.id=:id and s.machine_id=m.id"
+    result = db.session.execute(sql, {"id":id})
+    machine_info = result.fetchone()
+    return machine_info
 
 def get_machines(machine_type):
     if machine_type == "all":
@@ -102,6 +112,16 @@ def edit_machine(id, name, target, type):
     result = db.session.execute(sql, {"id":id, "name":name, "target":target, "type":type})
     db.session.commit()
 
+def edit_c_machine(id, time_info, resistance_info, additional_info):
+    sql = "update cardio_machine_in_a_plan set time_info=:time_info, resistance_info=:resistance_info, additional_info=:additional_info where id=:id"
+    result = db.session.execute(sql, {"time_info":time_info, "resistance_info":resistance_info, "additional_info":additional_info, "id":id})
+    db.session.commit()
+
+def edit_s_machine(id, weight_info, reps_info, additional_info):
+    sql = "update strength_machine_in_a_plan set weight_info=:weight_info, reps_info=:reps_info, additional_info=:additional_info where id=:id"
+    result = db.session.execute(sql, {"weight_info":weight_info, "reps_info":reps_info, "additional_info":additional_info, "id":id})
+    db.session.commit()
+
 def change_in_order(id, in_order):
     if in_order:
         in_order = False
@@ -121,3 +141,9 @@ def new_machine(name, type, target):
     sql = "insert into machines (name, targeted_muscles, machine_type, in_order) values (:name, :target, :type, True)"
     result = db.session.execute(sql, {"name":name, "target":target, "type":type})
     db.session.commit()
+
+def get_gym_plan_info(id):
+    sql = "select * from gym_plans where id=:id"
+    result = db.session.execute(sql, {"id":id})
+    info = result.fetchone()
+    return info
