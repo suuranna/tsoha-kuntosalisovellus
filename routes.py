@@ -6,10 +6,7 @@ import functions
 
 @app.route("/")
 def index():
-    amount = 0
-    if session["username"]:
-        amount = functions.count_gym_plans(session["user_id"])
-    return render_template("index.html", amount=amount)
+    return render_template("index.html")
 
 @app.route("/login",methods=["POST"])
 def login():
@@ -36,8 +33,9 @@ def result():
 def achievements():
     if request.method == "GET":
         machines = functions.get_machines("all")
+        count = functions.count_achievements(session["user_id"])
         achievements = functions.get_achievements(session["user_id"])
-        return render_template("achievements.html", machines=machines, achievements=achievements)
+        return render_template("achievements.html", machines=machines, achievements=achievements, count=count)
     if request.method == "POST":
         machine_id = request.form["machine"]
         achievement = request.form["achievement"]
@@ -116,8 +114,9 @@ def delete_gym_plan(id):
 
 @app.route("/gym_plans")
 def gym_plans():
+    amount = functions.count_gym_plans(session["user_id"])
     gym_plans = functions.get_gym_plans(session["user_id"])
-    return render_template("gym_plans.html", plans=gym_plans)
+    return render_template("gym_plans.html", plans=gym_plans, amount=amount)
 
 @app.route("/edit_gym_plan/<int:id>", methods=["GET", "POST"])
 def edit_gym_plan(id):

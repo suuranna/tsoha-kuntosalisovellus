@@ -197,3 +197,9 @@ def edit_achievement(id, achievement):
     sql = "update achievements set achievement=:achievement where id=:id"
     result = db.session.execute(sql, {"achievement":achievement, "id":id})
     db.session.commit()
+
+def count_achievements(user_id):
+    sql = "select count(*) from achievements where user_id=:user_id"
+    result = db.session.execute(sql, {"user_id":user_id})
+    count = result.fetchone()[0]
+    return count
