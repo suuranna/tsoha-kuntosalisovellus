@@ -122,6 +122,11 @@ def delete_machine_from_a_plan(id, type):
     result = db.session.execute(sql, {"id":id})
     db.session.commit()
 
+def delete_achievement(id):
+    sql = "delete from achievements where id=:id"
+    result =db.session.execute(sql, {"id":id})
+    db.session.commit()
+
 def edit_machine(id, name, target, type):
     sql = "update machines set name=:name, targeted_muscles=:target, machine_type=:type where id=:id"
     result = db.session.execute(sql, {"id":id, "name":name, "target":target, "type":type})
@@ -166,4 +171,29 @@ def get_gym_plan_info(id):
 def edit_gym_plan_info(id, name, description):
     sql = "update gym_plans set name=:name, description=:description where id=:id"
     result = db.session.execute(sql, {"id":id, "name":name, "description":description})
+    db.session.commit()
+
+def get_achievements(user_id):
+    sql = "select a.machine_id, m.name, a.achievement, a.date from machines m, achievements a where a.user_id=:user_id and m.id=a.machine_id"
+    result = db.session.execute(sql, {"user_id":user_id})
+    achievements = result.fetchall()
+    return achievements
+
+def get_one_achievement(id):
+    sql = "select a.machine_id, m.name, a.achievement, a.date from machines m, achievements a where a.id=:id"
+    result = db.session.execute(sql, {"id":id})
+    achievement = result.fetchone()
+    return achievement
+
+def get_newest_achievment(user_id):
+    sql = "select m.name, a.achievement, a.date from machines m, achievements a where a.machine_id=m.id having max(date)"
+
+def add_new_achievement(user_id, machine_id, achievement):
+    sql = "insert into achievements (user_id, machine_id, achievement, date) values (:user_id, :machine_id, :achievement, NOW())"
+    result = db.session.execute(sql, {"user_id":user_id, "machine_id":machine_id, "achievement":achievement})
+    db.session.commit()
+
+def edit_achievement(id, achievement):
+    sql = "update achievements set achievement=:achievement where id=:id"
+    result = db.session.execute(sql, {"achievement":achievement, "id":id})
     db.session.commit()

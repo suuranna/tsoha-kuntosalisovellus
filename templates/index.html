@@ -1,6 +1,6 @@
 
 {% extends "layout.html" %}
-{% block title %}Otsikko{% endblock %}
+{% block title %}{% endblock %}
 {% block content %}
 
 {% if session.username %}
@@ -10,6 +10,7 @@
 <h3><a href="/gym_plans">Tarkastele omia saliohjelmia</a> </h3>
 Omien salisuunnitelmien määrä: {{ amount }}
 <h3><a href="/achievements">Tarkastele omia saavutuksia</a></h3>
+Saavutuksia kirjattu x kappeletta <br>
 Viimeisin saavutus kirjattu y, <br>
 joka oli laitteella x 
 

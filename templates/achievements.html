@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+<form action="/achievements" method="POST">
+<h2>Omat saavutukset</h2>
+{% for achievement in achievements %}
+Laitteen nimi, jolla saavutus tehtiin: {{ achievement[1] }} <br>
+Saavutus: {{ achievement[2] }} <br>
+Saavutuksen kirjaamisajankohta: {{ achievement[3].strftime("%d.%m.%Y klo %H:%M:%S") }}
+<br>
+<a href="/edit_achievement/{{ achievement[0] }}">Muokkaa saavutusta</a> | 
+<a href="/delete_achievement/{{ achievement[0] }}">Poista saavutus</a>
+{% endfor %}
+<h3>Lisää uusi saavutus</h3>
+Valitse laite: 
+<SELECT name="machine">
+{% for machine in machines %}
+{% if machine[4] %}
+<option value="{{ machine[0] }}">{{ machine[1] }}</option>
+{% endif %}
+{% endfor %}
+</SELECT> <br>
+Kerro, mitä saavutit (esim. oma uusi painoennätys, uusi suurempi toistomäärä jne.): <br>
+<textarea name="achievement" rows="5" cols="40"></textarea> <br>
+<input type="submit" name="button" value="Lisää saavutus">
+
+{% endblock %}

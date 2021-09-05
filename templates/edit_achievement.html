@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}Alueet{% endblock %}
+{% block content %}
+<form action="/edit_achievement/{{ id }}" method="POST">
+Laite, jolla saavutus tehtiin: {{ achievement[1] }} <br>
+Kerro, mitä saavutit (esim. oma uusi painoennätys, uusi suurempi toistomäärä jne.): <br>
+<textarea name="achievement" rows="5" cols="40">{{ achievement[2] }}</textarea> <br>
+<input type="submit" name="button" value="Muokkaa saavutusta">
+
+{% endblock %}

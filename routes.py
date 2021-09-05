@@ -30,6 +30,36 @@ def login():
 def result():
     query = request.args["query"]
 
+@app.route("/achievements", methods=["GET", "POST"])
+def achievements():
+    if request.method == "GET":
+        machines = functions.get_machines("all")
+        achievements = functions.get_achievements(session["user_id"])
+        return render_template("achievements.html", machines=machines, achievements=achievements)
+    if request.method == "POST":
+        machine_id = request.form["machine"]
+        achievement = request.form["achievement"]
+        functions.add_new_achievement(session["user_id"], machine_id, achievement)
+        return render_template("message.html", message1="Uusi saavutus lisätty onnistuneesti", message2="Takaisin saavutuksiin", route="/achievements")
+
+@app.route("/delete_achievement/<int:id>", methods=["GET", "POST"])
+def delete_achievement(id):
+    if request.method == "GET":
+        return render_template("delete.html", route="/delete_achievement/"+str(id), message="Haluatko varmasti poistaa tämän saavutuksen?", back="/achievements", submit="Poista tämä saavutus")
+    if request.method == "POST":
+        functions.delete_achievement(id)
+        return render_template("message.html", message1="Saavutus poistettu onnistuneesti", message2="Palaa takaisin saavutuksiin", route="/achievements")
+
+@app.route("/edit_achievement/<int:id>", methods=["GET", "POST"])
+def edit_achievement(id):
+    if request.method == "GET":
+        achievement = functions.get_one_achievement(id)
+        return render_template("edit_achievement.html", id=id, achievement=achievement)
+    if request.method == "POST":
+        achievement = request.form["achievement"]
+        functions.edit_achievement(id, achievement)
+        return render_template("message.html", message1="Saavutusta muokattu onnistuneesti", message2="Palaa takaisin saavutuksiin", route="/achievements")
+
 @app.route("/logout")
 def logout():
     del session["username"]
