@@ -7,6 +7,7 @@ Kaikki sovelluksen perustoiminnallisuudet toimivat, ulkoasu jäi vähän viimeis
 Sovellusta voi testata peruskäyttäjänä luomalla käyttäjätunnuksen tai ylläpitäjänä käyttämällä tunnuksia:
 
 käyttäjätunnus: ylläpitäjä
+
 salasana: salasana
 
 (Vain README:tä on muokattu deadlinen jälkeen)
