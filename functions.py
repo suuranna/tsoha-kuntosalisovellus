@@ -1,6 +1,11 @@
 from db import db
 from datetime import datetime
 
+def right_length(min, max, text):
+    if len(text) > max or len(text) < min:
+        return False
+    return True
+
 def get_password(username):
     sql = "select password from users where username=:username"
     result = db.session.execute(sql, {"username":username})
@@ -184,9 +189,6 @@ def get_one_achievement(id):
     result = db.session.execute(sql, {"id":id})
     achievement = result.fetchone()
     return achievement
-
-def get_newest_achievment(user_id):
-    sql = "select m.name, a.achievement, a.date from machines m, achievements a where a.machine_id=m.id having max(date)"
 
 def add_new_achievement(user_id, machine_id, achievement):
     sql = "insert into achievements (user_id, machine_id, achievement, date) values (:user_id, :machine_id, :achievement, NOW())"

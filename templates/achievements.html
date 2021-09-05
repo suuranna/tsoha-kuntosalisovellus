@@ -4,8 +4,6 @@
 <form action="/achievements" method="POST">
 <h2>Omat saavutukset</h2>
 Saavutuksia kirjattu {{ count }} kappeletta <br>
-Viimeisin saavutus kirjattu y, <br>
-joka oli laitteella x
                           
 {% for achievement in achievements %}
 Laitteen nimi, jolla saavutus tehtiin: {{ achievement[1] }} <br>
@@ -14,6 +12,7 @@ Saavutuksen kirjaamisajankohta: {{ achievement[3].strftime("%d.%m.%Y klo %H:%M:%
 <br>
 <a href="/edit_achievement/{{ achievement[0] }}">Muokkaa saavutusta</a> | 
 <a href="/delete_achievement/{{ achievement[0] }}">Poista saavutus</a>
+<hr>
 {% endfor %}
 <h3>Lisää uusi saavutus</h3>
 Valitse laite: 
