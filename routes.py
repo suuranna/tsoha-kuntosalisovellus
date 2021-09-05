@@ -35,8 +35,8 @@ def achievements():
     if request.method == "POST":
         machine_id = request.form["machine"]
         achievement = request.form["achievement"]
-        if not functions.right_length(0, 350, achievement):
-            return render_template("message.html", message1="Kirjoittamasi teksti oli liian pitkä", message2="Yritä uudelleen siirtymällä takaisin suunnitelmiin", route="/achievements")
+        if not functions.right_length(0, 200, achievement):
+            return render_template("message.html", message1="Kirjoittamasi teksti oli liian pitkä (yli 200 merkkiä)", message2="Yritä uudelleen siirtymällä takaisin suunnitelmiin", route="/achievements")
         functions.add_new_achievement(session["user_id"], machine_id, achievement)
         return render_template("message.html", message1="Uusi saavutus lisätty onnistuneesti", message2="Takaisin saavutuksiin", route="/achievements")
 
@@ -55,8 +55,8 @@ def edit_achievement(id):
         return render_template("edit_achievement.html", id=id, achievement=achievement)
     if request.method == "POST":
         achievement = request.form["achievement"]
-        if not functions.right_length(0, 350, achievement):
-            return render_template("message.html", message1="Kirjoittamasi teksti oli liian pitkä", message2="Yritä uudelleen siirtymällä takaisin suunnitelmiin", route="/achievements")
+        if not functions.right_length(0, 200, achievement):
+            return render_template("message.html", message1="Kirjoittamasi teksti oli liian pitkä (yli 200 merkkiä)", message2="Yritä uudelleen siirtymällä takaisin suunnitelmiin", route="/achievements")
         functions.edit_achievement(id, achievement)
         return render_template("message.html", message1="Saavutusta muokattu onnistuneesti", message2="Palaa takaisin saavutuksiin", route="/achievements")
 
@@ -99,7 +99,7 @@ def add_gym_plan():
         name = request.form["name"]
         description = request.form["description"]
         if not functions.right_length(0, 50, name) or not functions.right_length(0,200,description):
-            return render_template("message.html", message1="Kirjoittamasi teksti oli liian pitkä", message2="Yritä uudelleen", route="/add_gym_plan")
+            return render_template("message.html", message1="Kirjoittamasi teksti oli liian pitkä)", message2="Yritä uudelleen", route="/add_gym_plan")
         succesful_adding = functions.add_gym_plan(session["user_id"], description, name)
         if succesful_adding:
             return render_template("message.html", message1="Kuntosalisuunnitelman luominen onnistui", message2="Siirry takaisin omiin kuntosalisuunnitelmiin", route="/gym_plans")
@@ -136,7 +136,7 @@ def edit_gym_plan(id):
             resistance_info = request.form["resistance_info"]
             additional_info = request.form["additional_info"]
             if not functions.right_length(0, 100, time_info) or not functions.right_length(0,100,resistance_info) or not functions.right_length(0,100,additional_info):
-                return render_template("message.html", message1="Kirjoittamasi teksti oli liian pitkä", message2="Yritä uudelleen", route="/edit_gym_plan/"+str(id))
+                return render_template("message.html", message1="Kirjoittamasi teksti oli liian pitkä (yli 100 merkkiä)", message2="Yritä uudelleen", route="/edit_gym_plan/"+str(id))
             succesful_adding = functions.add_c_machine_in_a_plan(machine_id, id, time_info, resistance_info, additional_info)
         elif request.form["button"] == "Lisää voimailulaite":
             machine_id = request.form["s_machine"]
@@ -144,7 +144,7 @@ def edit_gym_plan(id):
             reps_info = request.form["reps_info"]
             additional_info = request.form["additional_info"]
             if not functions.right_length(0, 100, weight_info) or not functions.right_length(0,100,reps_info) or not functions.right_length(0,100,additional_info):
-                return render_template("message.html", message1="Kirjoittamasi teksti oli liian pitkä", message2="Yritä uudelleen", route="/edit_gym_plan/"+str(id))
+                return render_template("message.html", message1="Kirjoittamasi teksti oli liian pitkä (yli 100 merkkiä)", message2="Yritä uudelleen", route="/edit_gym_plan/"+str(id))
             succesful_adding = functions.add_s_machine_in_a_plan(machine_id, id, weight_info, reps_info, additional_info)
         else:
             return "Virhe!"
