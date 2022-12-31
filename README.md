@@ -13,6 +13,7 @@ salasana: salasana
 (Vain README:tä on muokattu deadlinen jälkeen)
 
 [Linkki Herokuun](https://tsoha-kuntosalisovellus.herokuapp.com)
+(Linkki ei enää toimi, koska Herokusta tuli maksullinen)
 
 ### Sovelluksen idea tiivistettynä
 
